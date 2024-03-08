@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/rcxigemm.dir/run_matrix.cu.o matrix/CMakeFiles/matrix.dir/gen_matrix.cu.o matrix/CMakeFiles/matrix.dir/print_matrix.cu.o matrix/CMakeFiles/matrix.dir/operator_matrix.cu.o -o rcxigemm  -lcublas -lcurand -lcudadevrt -lcudart_static -lrt -lpthread -ldl  -L"/usr/local/cuda/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda/targets/x86_64-linux/lib"

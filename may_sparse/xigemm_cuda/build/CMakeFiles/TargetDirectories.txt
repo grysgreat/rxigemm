@@ -1,0 +1,10 @@
+/root/may_sparse/xigemm_cuda/build/CMakeFiles/rcxigemm.dir
+/root/may_sparse/xigemm_cuda/build/CMakeFiles/edit_cache.dir
+/root/may_sparse/xigemm_cuda/build/CMakeFiles/rebuild_cache.dir
+/root/may_sparse/xigemm_cuda/build/matrix/CMakeFiles/matrix.dir
+/root/may_sparse/xigemm_cuda/build/matrix/CMakeFiles/edit_cache.dir
+/root/may_sparse/xigemm_cuda/build/matrix/CMakeFiles/rebuild_cache.dir
+/root/may_sparse/xigemm_cuda/build/matrix/test/CMakeFiles/operator_matrix_test.dir
+/root/may_sparse/xigemm_cuda/build/matrix/test/CMakeFiles/cublas_lib_test.dir
+/root/may_sparse/xigemm_cuda/build/matrix/test/CMakeFiles/edit_cache.dir
+/root/may_sparse/xigemm_cuda/build/matrix/test/CMakeFiles/rebuild_cache.dir
