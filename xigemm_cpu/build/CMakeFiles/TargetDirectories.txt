@@ -1,0 +1,5 @@
+/root/may_sparse/xigemm_cpu/build/CMakeFiles/precision_test.dir
+/root/may_sparse/xigemm_cpu/build/CMakeFiles/edit_cache.dir
+/root/may_sparse/xigemm_cpu/build/CMakeFiles/rebuild_cache.dir
+/root/may_sparse/xigemm_cpu/build/src/matrix/CMakeFiles/edit_cache.dir
+/root/may_sparse/xigemm_cpu/build/src/matrix/CMakeFiles/rebuild_cache.dir

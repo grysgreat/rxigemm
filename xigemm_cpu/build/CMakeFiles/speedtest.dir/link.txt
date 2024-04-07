@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3  -mavx -mfma -march=native -Wno-deprecated-anon-enum-enum-conversion -m64 -O3 -DNDEBUG CMakeFiles/speedtest.dir/src/test/speed_test.cpp.o -o speedtest 

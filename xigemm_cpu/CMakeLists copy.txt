@@ -1,0 +1,74 @@
+cmake_minimum_required(VERSION 3.5)
+project(gemmBench)
+
+option(WITH_MKL "Include Intel MKL" ON)
+
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 ")
+endif()
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx -mfma -march=native -Wno-deprecated-anon-enum-enum-conversion")
+
+set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(RCXIGEMM_BIN_NAME rcxigemm)
+
+
+set(LIBRARIES)
+
+find_package(MKL REQUIRED)
+include_directories(${MKL_INCLUDE_DIRS})
+if(WITH_MKL)
+set(MKL_ROOT /opt/intel/oneapi/mkl/2022.0.2)
+
+
+  # Find MKL includes.
+  find_path(MKL_INCLUDE_DIR NAMES mkl.h HINTS ${MKL_ROOT}/include/)
+  if(MKL_INCLUDE_DIR)
+    message(STATUS "Found MKL include directory: ${MKL_INCLUDE_DIR}")
+  else()
+    message(FATAL_ERROR "MKL include directory not found" ${MKL_ROOT})
+  endif()
+
+  # Find MKL libraries.
+  find_library(MKL_CORE_LIBRARY NAMES mkl_core PATHS ${MKL_ROOT}/lib/intel64)
+  if(MKL_CORE_LIBRARY)
+    get_filename_component(MKL_LIBRARY_DIR ${MKL_CORE_LIBRARY} DIRECTORY)
+    message(STATUS "Found MKL library directory: ${MKL_LIBRARY_DIR}")
+  else()
+    message(FATAL_ERROR "MKL library directory not found")
+  endif()
+
+  include_directories(${MKL_INCLUDE_DIR})
+  add_definitions(-DWITH_MKL -DMKL_ILP64)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64")
+  set(MKL_LIBRARIES
+    ${MKL_LIBRARY_DIR}/libmkl_core.a
+    ${MKL_LIBRARY_DIR}/libmkl_gnu_thread.a
+    ${MKL_LIBRARY_DIR}/libmkl_intel_ilp64.a
+    )
+  list(APPEND LIBRARIES -Wl,--start-group ${MKL_LIBRARIES} -Wl,--end-group)
+  list(APPEND LIBRARIES gomp)
+endif()
+
+add_subdirectory(matrix)
+
+include_directories(${SOURCE_DIR})
+include_directories(${SOURCE_DIR}/matrix)
+
+add_executable(${RCXIGEMM_BIN_NAME}
+    ${CMAKE_CURRENT_SOURCE_DIR}/rxigemm_cpu.cpp
+)
+
+
+
+include_directories(${SOURCE_DIR}/matrix)
+
+
+target_link_libraries(${RCXIGEMM_BIN_NAME} ${LIBRARIES} 
+pthread
+libm.so
+libdl.so)
+
